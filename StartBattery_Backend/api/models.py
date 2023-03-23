@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 # from django.
 
 
@@ -23,5 +24,18 @@ class warrenty_claims(models.Model):
 
 
 
+class User(AbstractUser):
+    
+    # Username=models.CharField(max_length=100,unique=True)
+    # Name=models.CharField(max_length=100)
+    # Surname=models.CharField(max_length=100)
+    # Email=models.EmailField(unique=True)
+    # Password=models.CharField(max_length=15)
+    Phone=models.CharField(max_length=15,unique=True)
+    Address=models.TextField()
+    image=models.ImageField(upload_to='Media/UserImg',null=True,blank=True,default='')
 
+
+    def __str__(self) :
+        return self.username
 
