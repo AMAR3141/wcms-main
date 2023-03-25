@@ -6,7 +6,7 @@ from .models import warrenty_claims,User
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import ListAPIView,RetrieveAPIView
 
 
 # Create your views here.
@@ -15,20 +15,20 @@ from rest_framework.generics import GenericAPIView
         
 
 
-class Warrenty_Claim(GenericAPIView):
+class Warrenty_Claim(ListAPIView):
     
     queryset=warrenty_claims.objects.all()
     serializer_class=Warrent_Claim_Serializer
     paginator_class=PageNumberPagination 
 
-    def get_queryset(self):
-        return Response(self.serializer_class(self.queryset,many=True))
+    # def get_queryset(self):
+    #     return Response(self.serializer_class(self.queryset,many=True))
     
-    def get(self,reqeust):
+    # def get(self,reqeust):
         
-        serialized_data=Warrent_Claim_Serializer(self.queryset,many=True)
+    #     serialized_data=Warrent_Claim_Serializer(self.queryset,many=True)
         
-        return Response(serialized_data.data)
+    #     return Response(serialized_data.data)
     
 
 @api_view(['GET'])
