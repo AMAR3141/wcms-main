@@ -14,7 +14,9 @@ import ListProducts from "./pages/listProducts/ListProducts";
 
 const queryClient=new QueryClient()
 function App() {
+
   const { darkMode } = useContext(DarkModeContext);
+  
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -46,8 +46,8 @@ def get_Count_Register(request):
         elif response[i].Status=='Pending':
             pending_count+=1
 
-    print(pending_count)
-    print(approved_count)
+    
+    
 
         
     return JsonResponse({'pending_count':pending_count,'approved_count':approved_count})
@@ -62,10 +62,18 @@ class Shop_Users(APIView):
 
     def get(self,request):
 
+        id=self.request.query_params.get('id')
         queryset=User.objects.filter(is_staff=False)
-        for i in queryset:
-            print(i.is_active)
+        
         user_serializer=UserSerializer(queryset,many=True)
+                            
+        if id is not None:
+            
+            queryset=User.objects.get(id=id)
+            
+            user_serializer=UserSerializer(queryset,many=False)
+            
+        
         return Response(user_serializer.data)
     
     def post(self,request):

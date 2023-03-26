@@ -5,6 +5,7 @@ from.serializers import Warrent_Claim_Serializer,UserSerializer
 
 
 
+
 urlpatterns = [
     
     path('warrenty-get/',Warrenty_Claim.as_view(queryset=warrenty_claims.objects.all(), serializer_class=Warrent_Claim_Serializer),name='Warrenty_get_all'),

@@ -33,7 +33,7 @@ class User(AbstractUser):
     # Password=models.CharField(max_length=15)
     Phone=models.CharField(max_length=15,unique=True)
     Address=models.TextField()
-    image=models.ImageField(upload_to='Media/UserImg',null=True,blank=True,default='')
+    image=models.ImageField(upload_to='userImg/',null=True,blank=True,default='')
 
 
     def __str__(self) :

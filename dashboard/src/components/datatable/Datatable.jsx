@@ -33,29 +33,6 @@ const Datatable = () => {
 
   }
 
-
-  const actionColumn = [
-    {
-      field: "action",
-      headerName: "Action",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
-            <div
-              className="deleteButton"
-            // onClick={() => handleDelete(params.row.id)}
-            >
-              Delete
-            </div>
-          </div>
-        );
-      },
-    },
-  ];
   return (
     <div className="datatable">
       <div className="datatableTitle">
@@ -78,6 +55,7 @@ const Datatable = () => {
         </thead>
     { 
       data?.map((User,index)=>{
+        const viewURL=`/users/detail?id=${User.id}`
         return(
         <tbody>
         
@@ -86,7 +64,7 @@ const Datatable = () => {
             <td>{User.email}</td>
             <td>{User.is_active ? 'Active':'Non Active'}</td>
             <td><div className="cellAction">
-            <Link to="/users/detail" style={{ textDecoration: "none" }}>
+            <Link to={viewURL} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             <div
