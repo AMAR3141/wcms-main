@@ -8,47 +8,52 @@ import { color } from "@mui/system";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
-  const [Username, setUsername] = useState("");
-  const [Name, setName] = useState("");
-  const [Surname, setSurname] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Phone, setPhone] = useState("");
-  const [Address, setAddress] = useState("");
-  const [Password, setPassword] = useState("");
+  const [user,setUser]=useState({
 
-
-
+    'Username':'',
+    'Name':'',
+    'Surname':'',
+    'Email':'',
+    'Phone':'',
+    'Address':'',
+    'Password':'',
+  })
 
 
 
   const clearForm = () => {
-    setFile(' ')
-    setUsername('')
-    setName('')
-    setSurname('')
-    setEmail('')
-    setPhone('')
-    setAddress('')
-    setPassword('')
+    setFile('')
+    setUser({
+      'Username':'',
+    'Name':'',
+    'Surname':'',
+    'Email':'',
+    'Phone':'',
+    'Address':'',
+    'Password':'',
+    })
   }
   const { mutate: CreateUser, isLoading, data, isError, isSuccess, error } = AddUser();
   function handleSubmit(e) {
     e.preventDefault();
-
+    console.log(user)
     const formData=new FormData()
     formData.append('file',file)
-    formData.append('Username',Username)
-    formData.append('Name',Name)
-    formData.append('Surname',Surname)
-    formData.append('Email',Email)
-    formData.append('Phone',Phone)
-    formData.append('Address',Address)
-    formData.append('Password',Password)
+    formData.append('Username',user.Username)
+    formData.append('Name',user.Name)
+    formData.append('Surname',user.Surname)
+    formData.append('Email',user.Email)
+    formData.append('Phone',user.Phone)
+    formData.append('Address',user.Address)
+    formData.append('Password',user.Password)
     // const PostData = { Username, Name, Surname, Email, Phone, Address, Password, file }
 
     CreateUser(formData)
+ 
+    clearForm()
+    
 
-   console.log(file)
+  
   }
   
   
@@ -89,39 +94,39 @@ const New = ({ inputs, title }) => {
                 </div>
                 <div className="formInput">
                   <label>Username</label>
-                  <input type="text" id="username" onChange={(e) => setUsername(e.target.value)} value={Username} placeholder="john_doe" required />
+                  <input type="text" id="username" onChange={(e) => setUser({...user,Username:e.target.value})} value={user.Username} placeholder="john_doe" required />
                 </div>
                 <div className="formInput">
                   <label>Name</label>
-                  <input type="text" id="name" onChange={(e) => setName(e.target.value)} value={Name} placeholder="john" />
+                  <input type="text" id="name" onChange={(e) => setUser({...user,Name:e.target.value})} value={user.Name} placeholder="john" />
                 </div>
                 <div className="formInput">
 
                   <label>Last Name</label>
-                  <input type="text" id="surname" onChange={(e) => setSurname(e.target.value)} value={Surname} placeholder="doe" />
+                  <input type="text" id="surname" onChange={(e) => setUser({...user,Surname:e.target.value})} value={user.Surname} placeholder="doe" />
                 </div>
 
                 <div className="formInput">
 
                   <label>Email</label>
-                  <input type="email" id="email" onChange={(e) => setEmail(e.target.value)} value={Email} placeholder="john_doe@gmail.com" />
+                  <input type="email" id="email" onChange={(e) => setUser({...user,Email:e.target.value})} value={user.Email} placeholder="john_doe@gmail.com" />
                 </div>
 
                 <div className="formInput">
 
                   <label>Password</label>
-                  <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} value={Password} placeholder="Password" required />
+                  <input type="password" id="password" onChange={(e) => setUser({...user,Password:e.target.value})} value={user.Password} placeholder="Password" required />
                 </div>
 
                 <div className="formInput">
 
                   <label>phone</label>
-                  <input type="text" id="phone" onChange={(e) => setPhone(e.target.value)} value={Phone} placeholder="+1 234 567 89" required />
+                  <input type="text" id="phone" onChange={(e) => setUser({...user,Phone:e.target.value})} value={user.Phone} placeholder="+1 234 567 89" required />
                 </div>
                 <div className="formInput">
 
                   <label>Address</label>
-                  <input type="text" id="address" onChange={(e) => setAddress(e.target.value)} value={Address} placeholder="Elton St. 216 NewYork" required />
+                  <input type="text" id="address" onChange={(e) => setUser({...user,Address:e.target.value})} value={user.Address} placeholder="Elton St. 216 NewYork" required />
                 </div>
 
                 {

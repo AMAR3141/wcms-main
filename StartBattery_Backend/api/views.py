@@ -6,7 +6,7 @@ from .models import warrenty_claims,User
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import ListAPIView,RetrieveAPIView
 
 
 # Create your views here.
@@ -15,20 +15,20 @@ from rest_framework.generics import GenericAPIView
         
 
 
-class Warrenty_Claim(GenericAPIView):
+class Warrenty_Claim(ListAPIView):
     
     queryset=warrenty_claims.objects.all()
     serializer_class=Warrent_Claim_Serializer
     paginator_class=PageNumberPagination 
 
-    def get_queryset(self):
-        return Response(self.serializer_class(self.queryset,many=True))
+    # def get_queryset(self):
+    #     return Response(self.serializer_class(self.queryset,many=True))
     
-    def get(self,reqeust):
+    # def get(self,reqeust):
         
-        serialized_data=Warrent_Claim_Serializer(self.queryset,many=True)
+    #     serialized_data=Warrent_Claim_Serializer(self.queryset,many=True)
         
-        return Response(serialized_data.data)
+    #     return Response(serialized_data.data)
     
 
 @api_view(['GET'])
@@ -46,8 +46,8 @@ def get_Count_Register(request):
         elif response[i].Status=='Pending':
             pending_count+=1
 
-    print(pending_count)
-    print(approved_count)
+    
+    
 
         
     return JsonResponse({'pending_count':pending_count,'approved_count':approved_count})
@@ -57,17 +57,35 @@ def get_Count_Register(request):
 
 class Shop_Users(APIView):
 
-    queryset=User.objects.all()
-    serializer_class=UserSerializer
+    # queryset=User.objects.all()
+    # serializer_class=UserSerializer
+
+    def get(self,request):
+
+        id=self.request.query_params.get('id')
+        queryset=User.objects.filter(is_staff=False)
+        
+        user_serializer=UserSerializer(queryset,many=True)
+                            
+        if id is not None:
+            
+            queryset=User.objects.get(id=id)
+            
+            user_serializer=UserSerializer(queryset,many=False)
+            
+        
+        return Response(user_serializer.data)
     
     def post(self,request):
         data=request.data
+        queryset=User.objects.all()
+
         print(data['file'])
-        if self.queryset.filter(username=data['Username']): 
+        if queryset.filter(username=data['Username']): 
             status='UserName Already Exits'
-        elif self.queryset.filter(email=data['Email']):
+        elif queryset.filter(email=data['Email']):
             status='Email Already Exits'
-        elif self.queryset.filter(Phone=data['Phone']):
+        elif queryset.filter(Phone=data['Phone']):
             status='Phone Number Already Exits'
         else:
             response=User.objects.create(username=data['Username'],email=data['Email'],first_name=data['Name'],last_name=data['Surname'],password=data['Password'],image=data['file'],Address=data['Address'],Phone=data['Phone'])
@@ -80,6 +98,18 @@ class Shop_Users(APIView):
         #     status='Eror while submiting'
         
         return Response(status)
+    
+    # @api_view(['POST'])
+    def delete(self,request):
+        id=request.GET['id']
+        # id=('id')
+        data=User.objects.get(id=id)
+        data.delete()
+        if data:
+            return Response('okk')
+        else:
+            return Response('Error Deletig Data')
+            
 
                     
 
@@ -87,8 +117,13 @@ class Shop_Users(APIView):
 
 
 
-            
-        
+# API TO FETCH USERS CREATED
+
+# class FetchUsers(APIView):
+
+    
+
+
         
             
             

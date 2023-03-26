@@ -6,7 +6,7 @@ import { useMutation } from "react-query";
 export const AddUser = ()=>{
 
     const query=(data)=>{
-        return axios.post('http://127.0.0.1:8000/api/users/New/',data)
+        return axios.post('http://127.0.0.1:8000/api/users/',data)
     }
 
     return useMutation(query)

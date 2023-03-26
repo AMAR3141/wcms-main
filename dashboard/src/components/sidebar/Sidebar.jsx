@@ -30,13 +30,13 @@ const Sidebar = () => {
             </Link>
           </li>
           <p className="title">CLAIMS</p>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
               <TaskAltIcon className="icon" />
               <span>Registered Claims</span>
             </li>
           </Link>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/products" style={{ textDecoration: "none" }}>
             <li>
             <TaskAltIcon className="icon" />
               <span>Accepted Claims</span>
