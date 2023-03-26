@@ -57,17 +57,27 @@ def get_Count_Register(request):
 
 class Shop_Users(APIView):
 
-    queryset=User.objects.all()
-    serializer_class=UserSerializer
+    # queryset=User.objects.all()
+    # serializer_class=UserSerializer
+
+    def get(self,request):
+
+        queryset=User.objects.filter(is_staff=False)
+        for i in queryset:
+            print(i.is_active)
+        user_serializer=UserSerializer(queryset,many=True)
+        return Response(user_serializer.data)
     
     def post(self,request):
         data=request.data
+        queryset=User.objects.all()
+
         print(data['file'])
-        if self.queryset.filter(username=data['Username']): 
+        if queryset.filter(username=data['Username']): 
             status='UserName Already Exits'
-        elif self.queryset.filter(email=data['Email']):
+        elif queryset.filter(email=data['Email']):
             status='Email Already Exits'
-        elif self.queryset.filter(Phone=data['Phone']):
+        elif queryset.filter(Phone=data['Phone']):
             status='Phone Number Already Exits'
         else:
             response=User.objects.create(username=data['Username'],email=data['Email'],first_name=data['Name'],last_name=data['Surname'],password=data['Password'],image=data['file'],Address=data['Address'],Phone=data['Phone'])
@@ -80,6 +90,18 @@ class Shop_Users(APIView):
         #     status='Eror while submiting'
         
         return Response(status)
+    
+    # @api_view(['POST'])
+    def delete(self,request):
+        id=request.GET['id']
+        # id=('id')
+        data=User.objects.get(id=id)
+        data.delete()
+        if data:
+            return Response('okk')
+        else:
+            return Response('Error Deletig Data')
+            
 
                     
 
@@ -87,8 +109,13 @@ class Shop_Users(APIView):
 
 
 
-            
-        
+# API TO FETCH USERS CREATED
+
+# class FetchUsers(APIView):
+
+    
+
+
         
             
             

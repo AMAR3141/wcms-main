@@ -7,11 +7,12 @@ import axios from 'axios';
 import { useQuery } from "react-query";
 
 const Home = () => {
+  // Geting Count Of Querys Through API
   const { data ,isLoading,isError,error}=useQuery('GetCount',()=>{
     return(axios.get('http://127.0.0.1:8000/api/get_Count_Register/').then((res)=>res.data))
   });
   
-  console.log(data)
+
   return (
     <div className="home">
       <Sidebar />

@@ -8,7 +8,9 @@ import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
-import { QueryClientProvider,QueryClient} from "react-query"
+import { QueryClientProvider,QueryClient} from "react-query";
+import ListProducts from "./pages/listProducts/ListProducts";
+
 
 const queryClient=new QueryClient()
 function App() {
@@ -31,7 +33,7 @@ function App() {
               />
             </Route>
             <Route path="products">
-              <Route index element={<List />} />
+              <Route index element={<ListProducts />} />
               <Route path=":productId" element={<Single />} />
               <Route
                 path="new"
