@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.generics import ListAPIView,RetrieveAPIView
+from django.contrib.auth.hashers import make_password,check_password
 
 
 # Create your views here.
@@ -88,7 +89,9 @@ class Shop_Users(APIView):
         elif queryset.filter(Phone=data['Phone']):
             status='Phone Number Already Exits'
         else:
-            response=User.objects.create(username=data['Username'],email=data['Email'],first_name=data['Name'],last_name=data['Surname'],password=data['Password'],image=data['file'],Address=data['Address'],Phone=data['Phone'])
+            hash_password=make_password(data['Password'])
+            response=User.objects.create(username=data['Username'],email=data['Email'],first_name=data['Name'],last_name=data['Surname'],password=hash_password,image=data['file'],Address=data['Address'],Phone=data['Phone'])
+
                     
             if response:
                 status='User Created Succesfully'

@@ -10,6 +10,8 @@ import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { QueryClientProvider,QueryClient} from "react-query";
 import ListProducts from "./pages/listProducts/ListProducts";
+import NewProduct from "./pages/newProduct/NewProduct";
+
 
 
 const queryClient=new QueryClient()
@@ -39,7 +41,7 @@ function App() {
               <Route path=":productId" element={<Single />} />
               <Route
                 path="new"
-                element={<New inputs={productInputs} title="Add New Product" />}
+                element={<NewProduct inputs={productInputs} title="Add New Product" />}
               />
             </Route>
           </Route>
