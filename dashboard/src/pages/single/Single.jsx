@@ -43,7 +43,7 @@ if (isSuccess){
               <div className="item">
                 <img
                   src={'http://127.0.0.1:8000' + data?.data.image}
-                  alt=""
+                  alt="No image Found"
                   className="itemImg"
                 />
 

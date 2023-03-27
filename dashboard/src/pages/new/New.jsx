@@ -24,7 +24,7 @@ const New = ({ inputs, title }) => {
   const clearForm = () => {
     setFile('')
     setUser({
-      'Username':'',
+    'Username':'',
     'Name':'',
     'Surname':'',
     'Email':'',
