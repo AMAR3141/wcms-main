@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import "./LoginPage.css"
-import  logo from "./logo2.png"
+import logo from "./logo2.png"
 
 function LoginPage() {
   const [formData, setFormData] = useState({

@@ -93,11 +93,11 @@ const List = () => {
      {
       response.previous &&
       
-      <input type="button" value="Previous" title={url} onClick={()=>HandlePagination(response.previous)}/>
+      <input className="boom" type="button" value="Previous" title={url} onClick={()=>HandlePagination(response.previous)}/>
      }
       {
       response.next &&
-      <input type="button" value="Next" title={url} onClick={()=>HandlePagination(response.next)}className="float-end"/>
+      <input type="button" value="Next" title={url} onClick={()=>HandlePagination(response.next)}className="float-end boom"/>
 
       // <button  onClick={()=>setUrl(data.data.next)}className="float-end">Next</button>
 }
