@@ -5,9 +5,26 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+
+function CheckLogin(){
+  const navigate=useNavigate()
+  const loggedIn=Cookies.get('jwt')
+
+  if(!loggedIn){
+    return navigate('/login')
+  }
+  
+}
 
 const Navbar = () => {
+  CheckLogin()
   const { dispatch } = useContext(DarkModeContext);
+  
+
+
+
 
   return (
     <div className="navbar">

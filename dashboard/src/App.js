@@ -1,5 +1,5 @@
 import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
+import LoginPage from "./pages/login/LoginPage";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
@@ -11,12 +11,13 @@ import { DarkModeContext } from "./context/darkModeContext";
 import { QueryClientProvider,QueryClient} from "react-query";
 import ListProducts from "./pages/listProducts/ListProducts";
 import NewProduct from "./pages/newProduct/NewProduct";
-
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 
 const queryClient=new QueryClient()
 function App() {
-
+  
   const { darkMode } = useContext(DarkModeContext);
   
 
@@ -25,9 +26,9 @@ function App() {
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/">
             <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
             <Route path="users">
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />

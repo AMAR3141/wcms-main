@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from .models import warrenty_claims,User
-
+from djoser.serializers import UserCreateSerializer
 
 
 
@@ -13,7 +13,7 @@ class Warrent_Claim_Serializer(ModelSerializer):
 
 
 
-class UserSerializer(ModelSerializer):
+class UserSerializer(UserCreateSerializer):
 
     class Meta:
         model=User
