@@ -6,8 +6,16 @@ import { Link } from "react-router-dom";
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import SearchIcon from '@mui/icons-material/Search';
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
+function Logout(){
 
+  Cookies.remove('jwt')
+  
+
+  
+  }
 
 const Sidebar = () => {
     return (
@@ -80,7 +88,7 @@ const Sidebar = () => {
           <p className="title">USER</p>
           <li>
             <ExitToAppIcon className="icon" />
-            <span>Logout</span>
+            <span ><a href="#" onClick={()=>Logout()}>Logout</a></span>
           </li>
         </ul>
       </div>
