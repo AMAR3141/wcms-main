@@ -68,6 +68,21 @@ const Widget = ( props ) => {
         ),
       };
       break;
+      case "ClaimFulfilled":
+      data = {
+        title: "Fulfilled",
+        link: "View all Fulfilled Claims",
+        icon: (
+          <ArrowDropDownIcon
+            className="icon"
+            style={{
+              backgroundColor: "rgba(152, 152, 124, 0.2)",
+              color: "Black",
+            }}
+          />
+        ),
+      };
+      break;
     default:
       break;
   }

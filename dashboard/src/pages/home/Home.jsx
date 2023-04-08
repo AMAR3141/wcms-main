@@ -25,6 +25,7 @@ const Home = () => {
           <Widget type="ClaimAccepted" count={data?.approved_count} />
           <Widget type="ClaimRecieved" count="0"/>
           <Widget type="ClaimPending" count={data?.pending_count}/>
+          <Widget type="ClaimFulfilled" count="45"/>
         </div>
     
         <div className="listContainer">

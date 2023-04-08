@@ -4,7 +4,6 @@ import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { AddUser } from "../../postRequest";
 import { useEffect, useState } from "react";
-import { color } from "@mui/system";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");

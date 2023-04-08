@@ -56,7 +56,11 @@ const Sidebar = () => {
           </li>
           <li>
            <TaskAltIcon className="icon" />
-                <span>Pending Claims</span>
+              <span>Pending Claims</span>
+          </li>
+          <li>
+           <TaskAltIcon className="icon" />
+              <span>Fulfilled Claims</span>
           </li>
           <p className="title">SALE REGISTRATION</p>
           <li>

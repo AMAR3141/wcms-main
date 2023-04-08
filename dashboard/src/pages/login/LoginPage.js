@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import "./LoginPage.css"
 import logo from "./logo2.png"
+<<<<<<< HEAD
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import { useNavigate  } from "react-router-dom";
 import Cookies from 'js-cookie';
+=======
+>>>>>>> 3efe420e1081a52f4950775a878f9d3ef2377d63
 
 function LoginPage() {
   const navigate = useNavigate ();
