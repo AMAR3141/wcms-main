@@ -1,5 +1,4 @@
 import Home from "./pages/home/Home";
-<<<<<<< HEAD
 import LoginPage from "./pages/login/LoginPage";
 =======
 >>>>>>> 3efe420e1081a52f4950775a878f9d3ef2377d63
