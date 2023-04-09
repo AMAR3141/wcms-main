@@ -62,9 +62,9 @@ const NewProduct = ({ inputs, title }) => {
   return (
     <>
       <div className="new">
-        <Sidebar />
+        {/* <Sidebar /> */}
         <div className="newContainer">
-          <Navbar />
+          {/* <Navbar /> */}
           <div className="top">
             <h1>{title}</h1>
           </div>

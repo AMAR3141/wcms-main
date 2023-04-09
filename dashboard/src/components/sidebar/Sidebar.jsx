@@ -9,15 +9,20 @@ import SearchIcon from '@mui/icons-material/Search';
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-function Logout(){
-
-  Cookies.remove('jwt')
-  
-
-  
-  }
 
 const Sidebar = () => {
+  const navigate=useNavigate()
+  async function Logout (){
+    
+    await sessionStorage.clear()
+    Cookies.remove("jwt");
+      
+     window.location.href="/login";
+      
+      }
+  
+
+
     return (
     <div className="sidebar">
       <div className="top">

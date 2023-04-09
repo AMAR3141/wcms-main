@@ -14,6 +14,7 @@ import jwt,datetime
 import json
 
 
+
 # Create your views here.
 
 
@@ -151,6 +152,7 @@ class Auth(APIView):
 
             response = Response()
             response.set_cookie(key='jwt', value=token, httponly=True)
+            
             response.data = {
                 'jwt': token
             }
@@ -159,26 +161,52 @@ class Auth(APIView):
         except User.DoesNotExist:
             return Response({'error': 'User Not Found'})
 
-
-class userView(APIView):
+class GetLoginInfo(APIView):
 
     def get(self, request):
-        token = request.data
+        token = request.COOKIES.get('jwt')
         
-        if token is None:
-            return Response({'error': 'JWT token not found in cookie.'})
+        if not token:
+            return Response({'error': 'JWT token not found in cookie.'}, status=400)
 
+        try:
+            payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed('JWT token has expired')
+
+        user_id = payload.get('id')
+        user = User.objects.filter(id=user_id).first()
+
+        if not user:
+            return Response({'error': 'User not found'}, status=404)
+
+        serialized_data = UserSerializer(user, many=False).data
+        
+        return Response(serialized_data, status=200)
+
+# class userView(APIView):
+
+    # def get(self, request):
+    #     print('hii')
+    #     return Response('Hii')
+        # token =self.request.query_params.get('id')
+        
+        # if token is None:
+        #     return Response({'error': 'JWT token not found in cookie.'})
+
+        # print(token)
         # try:
-        #     if type(token)==str:
-        #         token=json.dumps(token).encode()
+        #     # if type(token)==str:
+        #         # token=json.dumps(token).encode()
         #     payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+        #     print(payload)
         # except jwt.ExpiredSignatureError:
         #     raise AuthenticationFailed('Unauthorized')
 
-        queryset = User.objects.get(id=token('jwt'))
-        serialized_data = UserSerializer(queryset,many=False)
+        # queryset = User.objects.get(id=payload['id'])
+        # serialized_data = UserSerializer(queryset,many=False)
 
-        return Response(serialized_data.data)
+        # return Response(serialized_data.data)
     
 
 

@@ -3,7 +3,7 @@ install the followig Libraries
 2.restFremwork(pip install djangorestframework)
 3.corsheaders
 4.Pillow
-5.
+5.PyjWT
 
 
 

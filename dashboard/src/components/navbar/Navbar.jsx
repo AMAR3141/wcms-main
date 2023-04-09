@@ -4,26 +4,39 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { DarkModeContext } from "../../context/darkModeContext";
-import { useContext } from "react";
+import { useContext, useEffect,useState } from "react";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
+import axios from "axios";
+import CryptoJS from "crypto-js";
 
-function CheckLogin(){
-  const navigate=useNavigate()
-  const loggedIn=Cookies.get('jwt')
+function checkLoggedIn(){
+  const secretKey = 'Iy24NuD9J3fkchdpWyTaP4GKOxB1igp0';
+  const storage_data=  sessionStorage.getItem('data');
 
-  if(!loggedIn){
-    return navigate('/login')
-  }
-  
+  const data=CryptoJS.AES.decrypt(storage_data,secretKey);
+  const decrypted_data=JSON.parse(data.toString(CryptoJS.enc.Utf8))
+
+  console.log(decrypted_data)
+    if(decrypted_data === undefined || decrypted_data===null){
+        window.location.href = "/login";
+    }else{
+    }
 }
 
+
+
 const Navbar = () => {
-  CheckLogin()
-  const { dispatch } = useContext(DarkModeContext);
   
+  let navigate=useNavigate()
+ useEffect(() => {
+  
+  checkLoggedIn()
+    
+ },[])
 
-
+  
+  const { dispatch } = useContext(DarkModeContext);
 
 
   return (
